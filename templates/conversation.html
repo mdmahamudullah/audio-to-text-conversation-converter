@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Sentences</title>
+    <style>
+        .clickable {
+            cursor: pointer;
+            color: blue;
+        }
+        .clickable:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transcription Sentences</h1>
+
+    <div id="sentenceContainer"></div>
+
+    <script>
+        // Get the transcription from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const transcription = urlParams.get('transcription');
+        
+        if (transcription) {
+            const sentences = transcription.split('. '); // Split the transcription into sentences
+            const sentenceContainer = document.getElementById('sentenceContainer');
+            
+            // Display each sentence as a clickable item
+            sentences.forEach((sentence, index) => {
+                let sentenceElement = document.createElement('p');
+                sentenceElement.innerText = sentence.trim() + '.';
+                sentenceElement.classList.add('clickable');
+                sentenceElement.addEventListener('click', function() {
+                    alert(`You clicked: ${sentence.trim()}`);
+                });
+                sentenceContainer.appendChild(sentenceElement);
+            });
+        }
+    </script>
+</body>
+</html>

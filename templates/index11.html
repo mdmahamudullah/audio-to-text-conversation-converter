@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio to Text with Speaker Diarization</title>
+</head>
+<body>
+    <h1>Upload an audio file for transcription</h1>
+    
+    <!-- File upload form -->
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <input type="submit" value="Upload">
+    </form>
+    
+    <hr>
+
+    <!-- Display the transcription if available -->
+    {% if transcription %}
+    <h2>Transcription of the Conversation:</h2>
+    <p>{{ transcription }}</p>
+    {% endif %}
+
+    <!-- Display speaker segments if available -->
+    {% if speaker_segments %}
+    <h2>Speaker Segments:</h2>
+    <ul>
+        {% for segment in speaker_segments %}
+        <li>Speaker: {{ segment.speaker }}, Start: {{ segment.start_time }}, End: {{ segment.end_time }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</body>
+</html>
